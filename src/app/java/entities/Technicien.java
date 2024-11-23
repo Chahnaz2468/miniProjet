@@ -1,4 +1,4 @@
-package personnes.enteties;
+package entities;
 
 public class Technicien extends Personnel {
     private String specialite;

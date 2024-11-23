@@ -1,4 +1,4 @@
-package personnes.enteties;
+package entities;
 
 public class Patient extends Personne {
     private String dateNaissance;

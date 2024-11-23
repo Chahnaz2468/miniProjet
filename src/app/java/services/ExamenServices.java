@@ -1,7 +1,7 @@
-package examens.services;
-import examens.entities.Examen;
-import examens.entities.TypeExamen;
-import examens.persistance.ExamenRepository;
+package services;
+import entities.Examen;
+import entities.TypeExamen;
+import persistance.ExamenRepository;
 
 public class ExamenServices {
     public void ajouterExamen(Examen examen) {

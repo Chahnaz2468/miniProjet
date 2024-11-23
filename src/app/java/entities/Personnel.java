@@ -1,4 +1,4 @@
-package personnes.enteties;
+package entities;
 
 public class Personnel extends Personne {
     protected int horraire;

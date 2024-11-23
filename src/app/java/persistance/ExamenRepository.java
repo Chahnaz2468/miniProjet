@@ -1,8 +1,7 @@
-package examens.persistance;
-import com.fasterxml.jackson.core.JsonProcessingException;
+package persistance;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import examens.entities.Examen;
-import examens.entities.TypeExamen;
+import entities.Examen;
+import entities.TypeExamen;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
@@ -13,7 +12,7 @@ public class ExamenRepository {
         ObjectMapper mapper = new ObjectMapper();
         try {
             mapper.writeValue(new File("ExamenData.json"), examen);
-            System.out.println("Examen avec succes ");
+            System.out.println("Examen ajouté avec succes ");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -24,7 +23,7 @@ public class ExamenRepository {
         try {
             List<Examen> examens = mapper.readValue(new File("ExamenData.json"), List.class);
             for (Examen examen : examens) {
-                if (examen.getTypeExamen().equals("typeExamen")) {
+                if (examen.getTypeExamen().equals(typeExamen)) {
                     examen.setCout(cout);
                 }
             }

@@ -1,12 +1,13 @@
-package examens.controllers;
-import examens.entities.Examen;
-import examens.entities.TypeExamen;
-import examens.services.ExamenServices;
-import examens.ihm.ExamenIHM;
-public class ExamenControllers {
-    protected ExamenServices es;
+package controllers;
+import entities.Examen;
+import entities.TypeExamen;
+import services.ExamenServices;
+import ihm.ExamenIHM;
 
-    public ExamenControllers(ExamenServices es) {
+public class ExamenController {
+    private ExamenServices es;
+
+    public ExamenController(ExamenServices es) {
         this.es = es;
     }
 

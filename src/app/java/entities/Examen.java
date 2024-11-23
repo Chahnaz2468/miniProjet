@@ -1,4 +1,4 @@
-package examens.entities;
+package entities;
 
 public class Examen {
     private TypeExamen typeExamen;
