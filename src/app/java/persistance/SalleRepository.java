@@ -1,9 +1,9 @@
-package projet.repository;
-import java.io.File;
-import java.io.IOException;
+package persistance;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import projet.entities.Salle;
+import entities.Salle;
+import java.io.File;
+import java.io.IOException;
 
 public class SalleRepository {
 	private static final String FILE_PATH = "salles.json";

@@ -1,8 +1,7 @@
-package projet.ihm_principal;
-
+package ihm;
 import java.util.Scanner;
+import controllers.ControllerPrincipal;
 
-import projet.controllers.ControllerPrincipal;
 public class MenuPrincipal {
 	    ControllerPrincipal  ControllerPrincipal;
 

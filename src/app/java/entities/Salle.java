@@ -1,6 +1,6 @@
-package projet.entities;
+package entities;
 
-import projet.ihm_salle.TypeExamen;
+import entities.TypeExamen;
 
 public class Salle {
 	 private int num;

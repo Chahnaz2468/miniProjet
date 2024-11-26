@@ -1,10 +1,8 @@
-package projet.services;
-
-
-import projet.entities.Salle;
-import projet.exceptions.DoubleSalleException;
-import projet.exceptions.SalleNonDisponibleException;
-import projet.repository.SalleRepository;
+package services;
+import entities.Salle;
+import exceptions.DoubleSalleException;
+import exceptions.SalleNonDisponibleException;
+import persistance.SalleRepository;
 
 public class SalleService {
 	SalleRepository salleRepository;

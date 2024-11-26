@@ -1,9 +1,9 @@
-package projet.controllers;
-
-import projet.entities.Salle;
-import projet.exceptions.SalleNonDisponibleException;
-import projet.ihm_salle.SalleIhm;
-import projet.services.SalleService;
+package controllers;
+import entities.Salle;
+import ihm.SalleIhm;
+import services.SalleService;
+import exceptions;
+import exceptions.SalleNonDisponibleException;
 
 public class SalleController {
 	   SalleService salleService;

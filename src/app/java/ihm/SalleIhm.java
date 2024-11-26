@@ -1,9 +1,8 @@
-package projet.ihm_salle;
-
+package ihm;
+import entities.Salle;
+import entities.TypeExamen;
 import java.util.Scanner;
-
-import projet.controllers.SalleController;
-import projet.entities.Salle;
+import controllers.SalleController;
 
 public class SalleIhm {
 	SalleController salleController;
