@@ -1,5 +1,5 @@
 package entities;
 
 public enum TypeExamen {
-    Radiographie,Echographie,Mammographie,Doppler,Scanner,IRM;
+    RADIOGRAPHIE,ECHOGRAPHIE,MAMMOGRAPHIE,DOPPLER,SCANNER,IRM;
 }
