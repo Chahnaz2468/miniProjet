@@ -2,7 +2,6 @@ package controllers;
 import entities.Salle;
 import ihm.SalleIhm;
 import services.SalleService;
-import exceptions;
 import exceptions.SalleNonDisponibleException;
 
 public class SalleController {

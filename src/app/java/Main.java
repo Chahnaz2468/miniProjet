@@ -1,8 +1,6 @@
-package projet;
-
 import java.util.Scanner;
 
-import projet.controllers.ControllerPrincipal;
+import controllers.ControllerPrincipal;
 
 public class Main {
 
@@ -16,10 +14,7 @@ public class Main {
 	    } finally {
 	        scanner.close();  
 	    }
-		    }
-		
-
-
 	}
+}
 
 

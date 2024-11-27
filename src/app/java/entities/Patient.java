@@ -4,7 +4,7 @@ public class Patient extends Personne {
     private String dateNaissance;
     private String addresse;
 
-    public Patient(double id, String nom, String prenom, double telephone, String dateNaissance, String addresse) {
+    public Patient(int id, String nom, String prenom, double telephone, String dateNaissance, String addresse) {
         super(id, nom, prenom, telephone);
         this.dateNaissance = dateNaissance;
         this.addresse = addresse;

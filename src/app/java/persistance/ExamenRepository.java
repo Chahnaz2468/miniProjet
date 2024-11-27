@@ -1,55 +1,81 @@
 package persistance;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.Examen;
 import entities.TypeExamen;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public class ExamenRepository {
-    public static void ajouterExamen(Examen examen) {
+    static File file = new File("src/app/resources/ExamenData.json");
+
+    public static int ajouterExamen(Examen examen) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            mapper.writeValue(new File("ExamenData.json"), examen);
-            System.out.println("Examen ajouté avec succes ");
+            List<Examen> examens;
+            if (file.exists() && file.length() > 0) {
+                examens = mapper.readValue(file, new TypeReference<List<Examen>>() {});
+            } else {
+                examens = new ArrayList<>();
+            }
+            examens.add(examen);
+            mapper.writeValue(file, examens);
+            return 1;
         } catch (IOException ex) {
             ex.printStackTrace();
+            return 0;
         }
     }
 
-    public static void modifierCoutExamen(TypeExamen typeExamen, float cout) {
+    public static int modifierCoutExamen(TypeExamen typeExamen, float cout) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            List<Examen> examens = mapper.readValue(new File("ExamenData.json"), List.class);
+            List<Examen> examens = mapper.readValue(file,new TypeReference<List<Examen>>() {});
+
             for (Examen examen : examens) {
                 if (examen.getTypeExamen().equals(typeExamen)) {
                     examen.setCout(cout);
                 }
             }
-            mapper.writeValue(new File("ExamenData.json"), examens);
-            System.out.println("Modification faite avec succes ");
-
+            mapper.writeValue(file, examens);
+            return 1;
         } catch (IOException e) {
             e.printStackTrace();
+            return 0;
         }
     }
 
-    public static void supprimerExamen(TypeExamen typeExamen) {
+    public static int supprimerExamen(TypeExamen typeExamen) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            List<Examen> examens = mapper.readValue(new File("ExamenData.json"), List.class);
+            List<Examen> examens = mapper.readValue(file,new TypeReference<List<Examen>>() {});
             Iterator<Examen> iterator = examens.iterator();
             while (iterator.hasNext()) {
                 Examen examen = iterator.next();
                 if (examen.getTypeExamen().equals(typeExamen)) {
                     iterator.remove();
                 }
-                mapper.writeValue(new File("ExamenData.json"), examens);
-                System.out.println("Suppresion faite avec succes ");
+                mapper.writeValue(file, examens);
+                return 1;
             }
         } catch (IOException e) {
             e.printStackTrace();
+            return 0;
+        }
+        return 0;
+    }
+
+    public static List<Examen> afficherExamens() {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            List<Examen> examens = mapper.readValue(file, new TypeReference<List<Examen>>() {});
+            return examens;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

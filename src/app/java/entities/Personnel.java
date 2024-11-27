@@ -5,7 +5,9 @@ public class Personnel extends Personne {
     protected int annexp;
     protected String email;
 
-    public Personnel(double id, String nom, String prenom, double telephone, int horaire, int annexp, String email) {
+    public Personnel() {}
+
+    public Personnel(int id, String nom, String prenom, double telephone, int horaire, int annexp, String email) {
         super(id, nom, prenom, telephone);
         this.horraire = horaire;
         this.annexp = annexp;

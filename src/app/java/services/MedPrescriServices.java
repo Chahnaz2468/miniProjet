@@ -2,16 +2,27 @@ package services;
 import entities.MedPrescri;
 import persistance.MedPrescriRepository;
 
+import java.util.List;
+
 public class MedPrescriServices {
-    public void ajouterMedPrescri(MedPrescri medPrescri) {
-        MedPrescriRepository.ajouterMedPriscri(medPrescri);
+
+    public int ajouterMedPrescri(MedPrescri medPrescri) {
+        return MedPrescriRepository.ajouterMedPriscri(medPrescri);
     }
 
-    public void modifierTelephoneMedPrescri(double id, double telephone) {
-        MedPrescriRepository.modifierTelephoneMedPrescri(id,telephone);
+    public int modifierTelephoneMedPrescri(int id, double telephone) {
+        return MedPrescriRepository.modifierTelephoneMedPrescri(id,telephone);
     }
 
-    public void supprimerMedPrescri(double id) {
-        MedPrescriRepository.supprimerMedPrescri(id);
+    public int supprimerMedPrescri(int id) {
+        return MedPrescriRepository.supprimerMedPrescri(id);
+    }
+
+    public List<MedPrescri> afficherMedprescris () {
+        return MedPrescriRepository.afficherMedPrescris();
+    }
+
+    public MedPrescri findMedPrescriById(int id) {
+        return MedPrescriRepository.findMedPrescriById(id);
     }
 }

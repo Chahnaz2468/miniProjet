@@ -1,23 +1,26 @@
 package entities;
 
 public class Personne {
-    protected double id;
+    protected int id;
     protected String nom;
     protected String prenom;
     protected double telephone;
 
-    public Personne(double id, String nom, String prenom, double telephone) {
+    public Personne() {
+    }
+
+    public Personne(int id, String nom, String prenom, double telephone) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.telephone = telephone;
     }
 
-    public double getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(double id) {
+    public void setId(int id) {
         this.id = id;
     }
 

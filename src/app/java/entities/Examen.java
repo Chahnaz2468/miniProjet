@@ -5,6 +5,9 @@ public class Examen {
     private float cout;
     private int duree;
 
+    public Examen() {
+    }
+
     public Examen(TypeExamen typeExamen, float cout, int duree) {
         this.typeExamen = typeExamen;
         this.cout = cout;

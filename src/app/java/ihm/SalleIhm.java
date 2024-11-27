@@ -63,9 +63,6 @@ public class SalleIhm {
         } while (choice != 3);
        
     }
-	
-	
-	
     }
 
     
