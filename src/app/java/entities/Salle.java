@@ -1,6 +1,5 @@
-package entities;
+package app.java.entities;
 
-import entities.TypeExamen;
 
 public class Salle {
 	 private int num;
@@ -29,10 +28,7 @@ public class Salle {
 	public void setDisponibilite(boolean disponibilite) {
 		this.disponibilite = disponibilite;
 	}
-	@Override
-	public String toString() {
-		return "Salle [num=" + num + ", typeExamen=" + typeExamen + ", disponibilite=" + disponibilite + "]";
-	}
+
      
 	 
 }

@@ -1,8 +1,8 @@
-package services;
-import entities.Salle;
-import exceptions.DoubleSalleException;
-import exceptions.SalleNonDisponibleException;
-import persistance.SalleRepository;
+package app.java.services;
+import app.java.entities.Salle;
+import app.java.exceptions.DoubleSalleException;
+import app.java.exceptions.SalleNonDisponibleException;
+import app.java.persistance.SalleRepository;
 
 public class SalleService {
 	SalleRepository salleRepository;
@@ -11,63 +11,47 @@ public class SalleService {
 		this.salleRepository =salleRepository;
 	}
 
+
 	public void ajouterSalle(Salle salle) throws DoubleSalleException {
-        Salle[] salles = salleRepository.getSalles();
-        for (int i = 0; i < salles.length; i++) {
-            if (salles[i] != null && salles[i].getNum() == salle.getNum()) {
-                throw new DoubleSalleException("Salle with number " + salle.getNum() + " already exists.");
+		Salle[] salles = salleRepository.getSalles();
+		for (Salle s : salles) {
+            if (s!=null && s.getNum() == salle.getNum()) {
+                throw new DoubleSalleException("Salle avec le numéro " + salle.getNum() + " existe déja.");
             }
-            if (salles[i] == null) {
-                salles[i] = salle;
-                salleRepository.saveSalles();
-                return;
-            }
-        }
-        System.out.println("No space available to add a new room."); 
+		}
+		salleRepository.saveSalles();
+	}
+	public void modifierSalle(int num, Salle newSalle) {
+		if (num > 0 && num < salleRepository.getSalles().length) {
+			salleRepository.getSalles()[num] = newSalle;
+			salleRepository.saveSalles();
+		}
+	}
+
+	public void retirerSalle(int num){
+		if (num > 0 && num < salleRepository.getSalles().length) {
+			salleRepository.getSalles()[num] = null;
+			salleRepository.saveSalles();
+		}
 	}
 
 	public boolean verifierSalleDisponibilite(int num) throws SalleNonDisponibleException {
-	    Salle[] salles = salleRepository.getSalles();
-	    boolean salleTrouvee = true;
+		Salle[] salles = salleRepository.getSalles();
+		for (Salle salle : salles) {
+			if (salle.getNum() == num) {
+				if (!salle.getDisponibilite()) {
+					throw new SalleNonDisponibleException("salle  " + num + " est non disponible.");
+				}
+				return true;
+			}
+		}
+		throw new SalleNonDisponibleException("salle "+ num + "n'existe pas déja.");
+	}
 
-	    for (Salle salle : salles) {
-	        
-	    	if (salle == null || salle.getNum() != num) {
-	    	    continue;
-	    	}
-	    	if (!salle.getDisponibilite()) {
-	    		salleTrouvee = false;
-	    	    throw new SalleNonDisponibleException("Room " + num + " is not available.");
-	    	}
-	    }
-		return salleTrouvee; 
-
-	     }
-	public void afficherSalles() {
-	    Salle[] salles = salleRepository.getSalles();
-	    if (salles == null || salles.length == 0) {
-	        System.out.println("Aucune salle disponible.");
-	        return;
-	    }
-
-	    boolean hasSalle = false;
-	    for (Salle salle : salles) {
-	        if (salle != null) {
-	            System.out.printf("Salle numéro: %d, Type: %s, Disponibilité: %b\n",
-	                salle.getNum(), salle.getTypeExamen(), salle.getDisponibilite());
-	            hasSalle = true;
-	        }
-	    }
-
-	    if (!hasSalle) {
-	        System.out.println("Aucune salle n'est actuellement ajoutée.");
-	    }
+	public Salle[] getSalles() {
+		return salleRepository.getSalles();
 	}
 
 
-	    
-	
 
-
-	 
 }
