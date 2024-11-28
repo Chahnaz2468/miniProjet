@@ -1,6 +1,5 @@
 package controllers;
 import entities.MedPrescri;
-import entities.MedRadio;
 import services.MedPrescriServices;
 import ihm.MedPrescriIHM;
 import java.util.List;
@@ -21,54 +20,12 @@ public class MedPrescriController {
         this.mps = mps;
     }
 
-    public void showMedPrescriMenu() {
-        Scanner scanner = new Scanner(System.in);
+    public void init(){
         MedPrescriIHM ihm = new MedPrescriIHM(this);
-        int choice = 0;
-        do {
-            System.out.println("\n===== Menu Gestion des medecins prescripteurs =====");
-            System.out.println("1. Ajouter un medecin prescripteur");
-            System.out.println("2. Modifier un medecin prescripteur");
-            System.out.println("3. Retirer un medecin prescripteur");
-            System.out.println("4. Trouver un medecin prescripteur");
-            System.out.println("5. Afficher les medecins prescripteurs");
-            System.out.println("6. Retour au Menu Principal");
-            System.out.print("Choisissez une option: ");
-
-            if (scanner.hasNextInt()) {
-                choice = scanner.nextInt();
-            } else {
-                System.out.println("Entrée invalide. Veuillez entrer un entier.");
-                scanner.next();
-                continue;
-            }
-
-            switch (choice) {
-                case 1:
-                    ihm.saisir();
-                    break;
-                case 2:
-                    ihm.modifierTelphoneMedPrescri();
-                    break;
-                case 3:
-                    ihm.supprimerMedPrescri();
-                    break;
-                case 4:
-                    ihm.findmedPrescriById();
-                    break;
-                case 5:
-                    ihm.afficherMedPrescris();
-                    break;
-                case 6:
-                    System.out.println("Retour au menu principal...");
-                    break;
-                default:
-                    System.out.println("Choix invalide, veuillez réessayer.");
-            }
-        } while (choice != 5);
+        ihm.showMedPrescriMenu();
     }
 
-    public int init(MedPrescri medPrescri) {
+    public int ajout(MedPrescri medPrescri) {
         return mps.ajouterMedPrescri(medPrescri);
     }
 

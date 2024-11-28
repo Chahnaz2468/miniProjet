@@ -21,6 +21,48 @@ public class ExamenIHM {
         this.ec = ec;
     }
 
+    public void showExamenMenu() {
+        Scanner scanner = new Scanner(System.in);
+        int choice = 0;
+        do {
+            System.out.println("\n===== Menu Gestion des Examens =====");
+            System.out.println("1. Ajouter un examen");
+            System.out.println("2. Modifier un examen");
+            System.out.println("3. Retirer un examen");
+            System.out.println("4. Afficher les examens");
+            System.out.println("5. Retour au Menu Principal");
+            System.out.print("Choisissez une option: ");
+
+            if (scanner.hasNextInt()) {
+                choice = scanner.nextInt();
+            } else {
+                System.out.println("Entrée invalide. Veuillez entrer un entier.");
+                scanner.next();
+                continue;
+            }
+
+            switch (choice) {
+                case 1:
+                    this.saisir();
+                    break;
+                case 2:
+                    this.modifierCout();
+                    break;
+                case 3:
+                    this.supprimerExamen();
+                    break;
+                case 4:
+                    this.afficherExamen();
+                    break;
+                case 5:
+                    System.out.println("Retour au menu principal...");
+                    break;
+                default:
+                    System.out.println("Choix invalide, veuillez réessayer.");
+            }
+        } while (choice != 5);
+    }
+
     public void saisir() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Veuillez saisir le type d'examen (Radiographie, Echographie, Mammographie, Doppler, Scanner, IRM): ");
@@ -36,7 +78,7 @@ public class ExamenIHM {
         System.out.println("Veuillez saisir la duree de l'examen: ");
         int dureeExamen = sc.nextInt();
         Examen ex = new Examen(typeExamen, coutExamen, dureeExamen);
-        if (ec.init(ex) ==1)
+        if (ec.ajout(ex) ==1)
             System.out.println("Examen ajouté avec succes ");
         else
             System.out.println("Erreur");

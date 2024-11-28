@@ -1,10 +1,7 @@
 package ihm;
 
-import controllers.ExamenController;
 import controllers.MedRadioController;
-import entities.Examen;
 import entities.MedRadio;
-import entities.TypeExamen;
 
 import java.util.List;
 import java.util.Scanner;
@@ -24,6 +21,52 @@ public class MedRadioIHM {
         this.mrc = mrc;
     }
 
+    public void showMedRadioMenu() {
+        Scanner scanner = new Scanner(System.in);
+        int choice = 0;
+        do {
+            System.out.println("\n===== Menu Gestion des medecins radiologues =====");
+            System.out.println("1. Ajouter un medecin radiologue");
+            System.out.println("2. Modifier un medecin radiologue");
+            System.out.println("3. Retirer un medecin radiologue");
+            System.out.println("4. Trouver un medecin radiologue");
+            System.out.println("5. Afficher les medecins radiologues");
+            System.out.println("6. Retour au Menu Principal");
+            System.out.print("Choisissez une option: ");
+
+            if (scanner.hasNextInt()) {
+                choice = scanner.nextInt();
+            } else {
+                System.out.println("Entrée invalide. Veuillez entrer un entier.");
+                scanner.next();
+                continue;
+            }
+
+            switch (choice) {
+                case 1:
+                    this.saisir();
+                    break;
+                case 2:
+                    this.modifierHorraireMedRadio();
+                    break;
+                case 3:
+                    this.supprimerMedRadio();
+                    break;
+                case 4:
+                    this.findMedRadioById();
+                    break;
+                case 5:
+                    this.afficherMedRadio();
+                    break;
+                case 6:
+                    System.out.println("Retour au menu principal...");
+                    break;
+                default:
+                    System.out.println("Choix invalide, veuillez réessayer.");
+            }
+        } while (choice != 6);
+    }
+
     public void saisir() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Veuillez saisir l'id du medecin radiologue: ");
@@ -41,7 +84,7 @@ public class MedRadioIHM {
         System.out.println("Veuillez saisir l'email: ");
         String email = sc.next();
         MedRadio medRadio = new MedRadio(id, nom, prenom, num, horraire, annexp, email);
-        if (mrc.init(medRadio) == 1)
+        if (mrc.ajout(medRadio) == 1)
             System.out.println("Medecin radiologue ajouté avec succes ");
         else
             System.out.println("Erreur");

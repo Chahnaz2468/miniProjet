@@ -20,6 +20,52 @@ public class MedPrescriIHM {
         this.mpc = mpc;
     }
 
+    public void showMedPrescriMenu() {
+        Scanner scanner = new Scanner(System.in);
+        int choice = 0;
+        do {
+            System.out.println("\n===== Menu Gestion des medecins prescripteurs =====");
+            System.out.println("1. Ajouter un medecin prescripteur");
+            System.out.println("2. Modifier un medecin prescripteur");
+            System.out.println("3. Retirer un medecin prescripteur");
+            System.out.println("4. Trouver un medecin prescripteur");
+            System.out.println("5. Afficher les medecins prescripteurs");
+            System.out.println("6. Retour au Menu Principal");
+            System.out.print("Choisissez une option: ");
+
+            if (scanner.hasNextInt()) {
+                choice = scanner.nextInt();
+            } else {
+                System.out.println("Entrée invalide. Veuillez entrer un entier.");
+                scanner.next();
+                continue;
+            }
+
+            switch (choice) {
+                case 1:
+                    this.saisir();
+                    break;
+                case 2:
+                    this.modifierTelphoneMedPrescri();
+                    break;
+                case 3:
+                    this.supprimerMedPrescri();
+                    break;
+                case 4:
+                    this.findmedPrescriById();
+                    break;
+                case 5:
+                    this.afficherMedPrescris();
+                    break;
+                case 6:
+                    System.out.println("Retour au menu principal...");
+                    break;
+                default:
+                    System.out.println("Choix invalide, veuillez réessayer.");
+            }
+        } while (choice != 6);
+    }
+
     public void saisir() {
         Scanner sc = new Scanner(System.in);
         System.out.println("donner l'identifiant: ");
@@ -33,7 +79,7 @@ public class MedPrescriIHM {
         System.out.println("donner la specialite: ");
         String spe = sc.next();
         MedPrescri medPrescri = new MedPrescri(id, nom, prenom, num, spe);
-        if (mpc.init(medPrescri) ==1)
+        if (mpc.ajout(medPrescri) ==1)
             System.out.println("Medecin prescripteur ajouté avec succes ");
         else
             System.out.println("Erreur");

@@ -21,6 +21,52 @@ public class TechIHM {
         this.tc = tc;
     }
 
+    public void showTechMenu() {
+        Scanner scanner = new Scanner(System.in);
+        int choice = 0;
+        do {
+            System.out.println("\n===== Menu Gestion des techniciens =====");
+            System.out.println("1. Ajouter un technicien");
+            System.out.println("2. Modifier un technicien");
+            System.out.println("3. Retirer un technicien");
+            System.out.println("4. Trouver un technicien");
+            System.out.println("5. Afficher les techniciens");
+            System.out.println("6. Retour au Menu Principal");
+            System.out.print("Choisissez une option: ");
+
+            if (scanner.hasNextInt()) {
+                choice = scanner.nextInt();
+            } else {
+                System.out.println("Entrée invalide. Veuillez entrer un entier.");
+                scanner.next();
+                continue;
+            }
+
+            switch (choice) {
+                case 1:
+                    this.saisir();
+                    break;
+                case 2:
+                    this.modifierHorraireTech();
+                    break;
+                case 3:
+                    this.supprimerTech();
+                    break;
+                case 4:
+                    this.findTechById();
+                    break;
+                case 5:
+                    this.afficherTech();
+                    break;
+                case 6:
+                    System.out.println("Retour au menu principal...");
+                    break;
+                default:
+                    System.out.println("Choix invalide, veuillez réessayer.");
+            }
+        } while (choice != 6);
+    }
+
     public void saisir() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Veuillez saisir l'id du technicien: ");
@@ -40,7 +86,7 @@ public class TechIHM {
         System.out.println("donner la specialité: ");
         String spe = sc.next();
         Technicien tech = new Technicien(id, nom, prenom, num, horraire, annexp, email,spe);
-        if (tc.init(tech) == 1)
+        if (tc.ajout(tech) == 1)
             System.out.println("Technicien ajouté avec succes ");
         else
             System.out.println("Erreur");

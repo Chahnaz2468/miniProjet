@@ -35,19 +35,19 @@ public class ControllerPrincipal {
 	}
 
 	public void gestionExamens() {
-		examenController.showExamenMenu();
+		examenController.init();
 	}
 
 	public void gestionMedPrescris() {
-		medPrescriController.showMedPrescriMenu();
+		medPrescriController.init();
 	}
 
 	public void gestionMedRadios() {
-		medRadioController.showMedRadioMenu();
+		medRadioController.init();
 	}
 
 	public void gestionTech() {
-		techController.showTechMenu();
+		techController.init();
 	}
 
     public void gestionPatient() {
