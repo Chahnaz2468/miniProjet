@@ -1,4 +1,4 @@
-package app.java.entities;
+package entities;
 
 
 public class Salle {

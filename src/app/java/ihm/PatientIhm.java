@@ -1,11 +1,11 @@
-package app.java.ihm;
+package ihm;
 
-import app.java.controllers.ControllerPrincipal;
-import app.java.controllers.PatientController;
-import app.java.entities.Patient;
+import controllers.ControllerPrincipal;
+import controllers.PatientController;
+import entities.Patient;
 
 
-import app.java.exceptions.PatientRedondanceException;
+import exceptions.PatientRedondanceException;
 
 import java.util.Scanner;
 
@@ -45,7 +45,7 @@ public class PatientIhm {
                     if (patients != null) {
                         for (Patient p : patients) {
 
-                                System.out.printf("Patient id: %f, nom:%s, prenom:%s, telephone:%f, date de naissance: %s,  adresse: %s",
+                                System.out.printf("Patient id: %d, nom:%s, prenom:%s, telephone:%f, date de naissance: %s,  adresse: %s",
                                         p.getId(), p.getNom(),p.getPrenom(),p.getTelephone(),p.getDateNaissance(), p.getAddresse());
 
                         }
@@ -53,7 +53,7 @@ public class PatientIhm {
                     break;
                 case 3:
                     System.out.println("Entrez l'id de la salle à modifier:");
-                    double id = scanner.nextDouble();
+                    int id = scanner.nextInt();
                     scanner.nextLine();
                     System.out.println("Entrez la nouvel date de naissance");
                     String dateNaissance=scanner.nextLine();
@@ -76,7 +76,7 @@ public class PatientIhm {
                     break;
                 case 4:
                     System.out.println("Entrez l'id de Patient à retirer:");
-                    id = scanner.nextDouble();
+                    id = scanner.nextInt();
                     patientController.retirerPatient(id);
                     System.out.println("le Patient est retiré.");
                     break;
@@ -93,7 +93,7 @@ public class PatientIhm {
     public Patient saisirPatient() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Entrez l'id de patient:");
-        double id = scanner.nextDouble();
+        int id = scanner.nextInt();
         scanner.nextLine();
         System.out.println("Entrez le nom de patient:");
         String nom= scanner.nextLine();

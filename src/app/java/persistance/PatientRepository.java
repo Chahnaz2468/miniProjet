@@ -1,7 +1,7 @@
-package app.java.persistance;
+package persistance;
 
 
-import app.java.entities.Patient;
+import entities.Patient;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

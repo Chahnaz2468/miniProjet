@@ -1,6 +1,6 @@
-package app.java.exceptions;
+package exceptions;
 
-public class PatientRedondanceException extends Exception {
+public class PatientRedondanceException extends RuntimeException {
     public PatientRedondanceException(String message) {
         super(message);
     }

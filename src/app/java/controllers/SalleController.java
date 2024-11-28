@@ -1,9 +1,9 @@
-package app.java.controllers;
-import app.java.services.SalleService;
-import app.java.entities.Salle;
-import app.java.ihm.SalleIhm;
-import app.java.exceptions.SalleNonDisponibleException;
-import app.java.exceptions.DoubleSalleException;
+package controllers;
+import services.SalleService;
+import entities.Salle;
+import ihm.SalleIhm;
+import exceptions.SalleNonDisponibleException;
+import exceptions.DoubleSalleException;
 
 public class SalleController {
 	   SalleService salleService;

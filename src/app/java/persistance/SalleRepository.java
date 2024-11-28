@@ -1,7 +1,7 @@
-package app.java.persistance;
+package persistance;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import app.java.entities.Salle;
+import entities.Salle;
 import java.io.File;
 import java.io.IOException;
 
@@ -9,7 +9,7 @@ public class SalleRepository {
 	private static final String FILE_PATH = "salles.json";
     private Salle[] salles = new Salle[100];
 
-    public SalleRepository() {
+    public SalleRepository(int i) {
         loadSalles();
         if (salles == null) this.salles = new Salle[100];
     }

@@ -1,10 +1,10 @@
-package app.java.ihm;
-import app.java.controllers.ControllerPrincipal;
-import app.java.entities.Salle;
-import app.java.entities.TypeExamen;
+package ihm;
+import controllers.ControllerPrincipal;
+import entities.Salle;
+import entities.TypeExamen;
 import java.util.Scanner;
-import app.java.controllers.SalleController;
-import app.java.exceptions.DoubleSalleException;
+import controllers.SalleController;
+import exceptions.DoubleSalleException;
 public class SalleIhm {
 	SalleController salleController;
 

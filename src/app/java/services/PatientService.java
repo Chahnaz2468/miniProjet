@@ -1,9 +1,9 @@
-package app.java.services;
+package services;
 
-import app.java.entities.Patient;
+import entities.Patient;
 
-import app.java.exceptions. PatientRedondanceException;
-import app.java.persistance.PatientRepository;
+import exceptions. PatientRedondanceException;
+import persistance.PatientRepository;
 
 public class PatientService {
     PatientRepository patientRepository;
@@ -21,16 +21,16 @@ public class PatientService {
         }
         patientRepository.savePatients();
     }
-    public void modifierPatient(double id, Patient newPatient) {
+    public void modifierPatient(int id, Patient newPatient) {
         if (id >0 && id < patientRepository.getPatients().length) {
-            patientRepository.getPatients()[(int) id] = newPatient;
+            patientRepository.getPatients()[id] = newPatient;
             patientRepository.savePatients();
         }
     }
 
-    public void retirerPatient(double id){
+    public void retirerPatient(int id){
         if (id >0 && id < patientRepository.getPatients().length) {
-            patientRepository.getPatients()[(int) id] = null;
+            patientRepository.getPatients()[id] = null;
             patientRepository.savePatients();
         }
     }

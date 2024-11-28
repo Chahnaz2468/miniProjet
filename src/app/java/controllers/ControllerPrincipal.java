@@ -1,6 +1,9 @@
 package controllers;
 import ihm.MenuPrincipal;
-import service.*;
+import persistance.PatientRepository;
+
+import ihm.PatientIhm;
+import services.*;
 
 public class ControllerPrincipal {
 
@@ -13,12 +16,12 @@ public class ControllerPrincipal {
 	MenuPrincipal menuPrincipal;
 
 	public ControllerPrincipal() {
-		this.salleController = new SalleController(new SalleService(new SalleRepository(20)));
+		this.salleController = new SalleController(new services.SalleService(new persistance.SalleRepository(20)));
 		this.examenController = new ExamenController(new ExamenServices());
 		this.medPrescriController = new MedPrescriController(new MedPrescriServices());
 		this.medRadioController = new MedRadioController(new MedRadioServices());
 		this.techController = new TechController(new TechServices());
-		this.patientController = new PatientController(new PatientServices());
+		this.patientController = new PatientController(new PatientService(new PatientRepository()));
 		this.menuPrincipal = new MenuPrincipal(this);
 	}
 
@@ -48,7 +51,7 @@ public class ControllerPrincipal {
 	}
 
     public void gestionPatient() {
-	PatientController.showPatientMenu();
+		patientController.init();}
 }
-}
+
 

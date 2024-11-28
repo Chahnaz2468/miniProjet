@@ -1,18 +1,16 @@
-package app.java.controllers;
+package controllers;
 
-import app.java.entities.Patient;
+import entities.Patient;
 
-import app.java.exceptions.PatientRedondanceException;
-import app.java.ihm.PatientIhm;
-import app.java.services.PatientService;
+import exceptions.PatientRedondanceException;
+import ihm.PatientIhm;
+import services.PatientService;
 
 public class PatientController {
     PatientService patientService;
     public PatientController(PatientService patientService) {
-
         this.patientService = patientService;
     }
-
 
     public void init() {
         PatientIhm patientIhm = new PatientIhm(this);
@@ -29,10 +27,10 @@ public class PatientController {
         return patientService.getPatients();
 
     }
-    public void modifiererPatient(double id, Patient newPatient) {
+    public void modifiererPatient(int id, Patient newPatient) {
         patientService.modifierPatient(id,newPatient);
     }
-    public void retirerPatient(double id) {
+    public void retirerPatient(int id) {
         patientService.retirerPatient(id);
     }
 

@@ -1,8 +1,8 @@
-package app.java.services;
-import app.java.entities.Salle;
-import app.java.exceptions.DoubleSalleException;
-import app.java.exceptions.SalleNonDisponibleException;
-import app.java.persistance.SalleRepository;
+package services;
+import entities.Salle;
+import exceptions.DoubleSalleException;
+import exceptions.SalleNonDisponibleException;
+import persistance.SalleRepository;
 
 public class SalleService {
 	SalleRepository salleRepository;
