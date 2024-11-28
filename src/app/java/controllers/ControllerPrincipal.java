@@ -1,8 +1,6 @@
 package controllers;
 import ihm.MenuPrincipal;
-import persistance.ExamenRepository;
-import persistance.SalleRepository;
-import services.*;
+import service.*;
 
 public class ControllerPrincipal {
 
@@ -11,6 +9,7 @@ public class ControllerPrincipal {
 	MedPrescriController medPrescriController;
 	MedRadioController medRadioController;
 	TechController techController;
+	PatientController patientController;
 	MenuPrincipal menuPrincipal;
 
 	public ControllerPrincipal() {
@@ -19,11 +18,12 @@ public class ControllerPrincipal {
 		this.medPrescriController = new MedPrescriController(new MedPrescriServices());
 		this.medRadioController = new MedRadioController(new MedRadioServices());
 		this.techController = new TechController(new TechServices());
+		this.patientController = new PatientController(new PatientServices());
 		this.menuPrincipal = new MenuPrincipal(this);
 	}
 
 	public void init() {
-		System.out.println("Welcome to the Radiology Center Management System");
+
 		menuPrincipal.showMenu();
 	}
 
@@ -46,5 +46,9 @@ public class ControllerPrincipal {
 	public void gestionTech() {
 		techController.showTechMenu();
 	}
+
+    public void gestionPatient() {
+	PatientController.showPatientMenu();
+}
 }
 

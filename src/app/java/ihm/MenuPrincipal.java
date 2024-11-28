@@ -12,6 +12,7 @@ public class MenuPrincipal {
 	    public void showMenu() {
 	        Scanner scanner = new Scanner(System.in);
 	        int choice = 0;
+			System.out.println("Bienvenue dans le Système de Gestion du Centre de Radiologie");
 	        do {
 	            System.out.println("\nMenu Principal:");
 	            System.out.println("1. Gestion des Salles");
@@ -19,7 +20,7 @@ public class MenuPrincipal {
 				System.out.println("3. Gestion des medecins prescripteurs");
 				System.out.println("4. Gestion des medecins radiologues");
 				System.out.println("5. Gestion des techniciens");
-	            /*System.out.println("6. Gestion des Patients");*/
+	            System.out.println("6. Gestion des Patients");
 	            System.out.println("7. Quitter");
 	            System.out.print("Choisissez une option: ");
 	            if (scanner.hasNextInt()) {
@@ -45,8 +46,11 @@ public class MenuPrincipal {
 					case 5:
 						ControllerPrincipal.gestionTech();
 	                case 6:
-	                    System.out.println("");
+						ControllerPrincipal.gestionPatient();
 	                    break;
+					case 7:
+						System.out.println("");
+						break;
 	                default:
 	                    System.out.println("Option invalide. Essayez encore.");
 	            }
