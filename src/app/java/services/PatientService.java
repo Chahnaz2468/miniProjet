@@ -35,9 +35,12 @@ public class PatientService {
         }
     }
 
-
-
     public Patient[] getPatients() {
         return patientRepository.getPatients();
     }
+
+    public Patient getPatient(int id) {
+        return patientRepository.getPatients()[id];
+    }
+
 }

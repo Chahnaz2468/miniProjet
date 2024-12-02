@@ -27,12 +27,17 @@ public class PatientController {
         return patientService.getPatients();
 
     }
+
     public void modifiererPatient(int id, Patient newPatient) {
         patientService.modifierPatient(id,newPatient);
     }
+
     public void retirerPatient(int id) {
         patientService.retirerPatient(id);
     }
 
+    public Patient trouverPatient(int id) {
+        return patientService.getPatient(id);
+    }
 
 }

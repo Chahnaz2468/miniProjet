@@ -13,6 +13,8 @@ public class ControllerPrincipal {
 	MedRadioController medRadioController;
 	TechController techController;
 	PatientController patientController;
+	DossierMedController dossierMedController;
+	RendezVousController rendezVousController;
 	MenuPrincipal menuPrincipal;
 
 	public ControllerPrincipal() {
@@ -22,6 +24,8 @@ public class ControllerPrincipal {
 		this.medRadioController = new MedRadioController(new MedRadioServices());
 		this.techController = new TechController(new TechServices());
 		this.patientController = new PatientController(new PatientService(new PatientRepository()));
+		this.dossierMedController = new DossierMedController(new DossierMedServices());
+		this.rendezVousController = new RendezVousController(new RendezVousServices());
 		this.menuPrincipal = new MenuPrincipal(this);
 	}
 
@@ -50,8 +54,11 @@ public class ControllerPrincipal {
 		techController.init();
 	}
 
-    public void gestionPatient() {
-		patientController.init();}
+    public void gestionPatient() {patientController.init();}
+
+	public void gestionDossierMed() {dossierMedController.init();}
+
+	public void gestionRendezVous() {rendezVousController.init();}
 }
 
 

@@ -5,6 +5,8 @@ import persistance.MedPrescriRepository;
 import java.util.List;
 
 public class MedPrescriServices {
+    public MedPrescriServices() {
+    }
 
     public int ajouterMedPrescri(MedPrescri medPrescri) {
         return MedPrescriRepository.ajouterMedPriscri(medPrescri);

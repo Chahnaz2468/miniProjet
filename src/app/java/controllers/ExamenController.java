@@ -41,4 +41,8 @@ public class ExamenController {
     public List<Examen> affich(){
         return es.afficherExamens();
     }
+
+    public Examen trouverExamen(TypeExamen typeExamen) {
+        return es.trouverExamenParType(typeExamen);
+    }
 }

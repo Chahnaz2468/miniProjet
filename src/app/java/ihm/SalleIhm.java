@@ -2,6 +2,8 @@ package ihm;
 import controllers.ControllerPrincipal;
 import entities.Salle;
 import entities.TypeExamen;
+
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import controllers.SalleController;
 import exceptions.DoubleSalleException;
@@ -22,7 +24,8 @@ public class SalleIhm {
             System.out.println("2. Afficher les Salles");
             System.out.println("3. modifier les Salles");
             System.out.println("4. retirer les Salles");
-            System.out.println("5. Retour au Menu Principal");
+            System.out.println("5. Vérifier Disponibilité Salle");
+            System.out.println("6. Retour au Menu Principal");
             System.out.print("Choisissez une option: ");
             choice = scanner.nextInt();
 
@@ -40,8 +43,9 @@ public class SalleIhm {
                     Salle[] salles = salleController.afficherSalles();
                     if (salles != null) {
                         for (Salle s : salles) {
-                            System.out.printf("Salle numéro: %d, Type: %s, Disponibilité: %b", s.getNum(), s.getTypeExamen(), s.getDisponibilite());
-
+                            if (s != null) {
+                                System.out.printf("Salle numéro: %d, Type: %s, Disponibilité: %b\n", s.getNum(), s.getTypeExamen(), s.getDisponibilite());
+                            }
                         }
                     } else {
                         System.out.println("Aucune salle disponible.");
@@ -71,13 +75,16 @@ public class SalleIhm {
                     System.out.println("la Salle est retirée.");
                     break;
                 case 5:
+                    verifierDisponibiliteSalle();
+                    break;
+                case 6:
                     ControllerPrincipal controllerPrincipal = new ControllerPrincipal();
                     controllerPrincipal.init();
                     break;
                 default:
                     System.out.println("Choix invalide, veuillez réessayer.");
             }
-        } while (choice != 5);
+        } while (choice != 6);
     }
 
     public Salle saisirSalle() {
@@ -91,11 +98,8 @@ public class SalleIhm {
         for (TypeExamen type : TypeExamen.values()) {
             System.out.println("- " + type);
         }
-
-
         TypeExamen typeExamen = null;
         boolean validInput = false;
-
         while (!validInput) {
             System.out.print("Entrez le type d'examen: ");
             String typeInput = scanner.nextLine().toUpperCase();
@@ -110,17 +114,33 @@ public class SalleIhm {
                 System.out.println("Type d'examen incorrect. Veuillez entrer un type exact parmi la liste.");
             }
         }
-
-
         return new Salle(num, typeExamen, disponibilite);
     }
 
-
-
-
-
-
+    public void verifierDisponibiliteSalle() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Veuillez saisir le type d'examen fait dans cette salle(RADIOGRAPHIE, ECHOGRAPHIE, MAMMOGRAPHIE, DOPPLER, SCANNER, IRM): ");
+        String input = scanner.next().toUpperCase();;
+        TypeExamen typeExamen = TypeExamen.valueOf(input);
+        System.out.println("Entrez la date et l'heure de début (yyyy-MM-ddTHH:mm):");
+        scanner.nextLine();
+        String debutInput = scanner.nextLine();
+        LocalDateTime debut = LocalDateTime.parse(debutInput);
+        System.out.println("Entrez la date et l'heure de fin (yyyy-MM-ddTHH:mm):");
+        String finInput = scanner.nextLine();
+        LocalDateTime fin = LocalDateTime.parse(finInput);
+        try {
+            boolean disponible = salleController.verifierSalleDisponibiliteParTemps(typeExamen, debut, fin);
+            if (disponible) {
+                System.out.println("La salle est disponible pour la période donnée.");
+            } else {
+                System.out.println("La salle n'est pas disponible pour cette période.");
+            }
+        } catch (IllegalArgumentException e) {
+            System.err.println("Erreur : " + e.getMessage());
+        }
     }
+}
 
     
 

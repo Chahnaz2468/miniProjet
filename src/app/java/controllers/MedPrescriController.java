@@ -6,7 +6,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MedPrescriController {
-    private MedPrescriServices mps;
+    private MedPrescriServices mps=new MedPrescriServices();
+
+    public MedPrescriController() {
+    }
 
     public MedPrescriController(MedPrescriServices mps) {
         this.mps = mps;

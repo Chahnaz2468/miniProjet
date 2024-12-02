@@ -1,9 +1,12 @@
 package controllers;
+import entities.TypeExamen;
 import services.SalleService;
 import entities.Salle;
 import ihm.SalleIhm;
 import exceptions.SalleNonDisponibleException;
 import exceptions.DoubleSalleException;
+
+import java.time.LocalDateTime;
 
 public class SalleController {
 	   SalleService salleService;
@@ -39,5 +42,7 @@ public class SalleController {
 		return salleService.verifierSalleDisponibilite(numero);
 	}
 
-
+	public boolean verifierSalleDisponibiliteParTemps(TypeExamen typeExamen, LocalDateTime debut, LocalDateTime fin) {
+		return salleService.verifierSalleDisponibiliteParTemps(typeExamen, debut, fin);
+	}
 }

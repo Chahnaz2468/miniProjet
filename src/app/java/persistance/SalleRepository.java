@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class SalleRepository {
-	private static final String FILE_PATH = "salles.json";
+    static File file = new File("src/app/resources/SalleData.json");
     private Salle[] salles = new Salle[100];
 
     public SalleRepository(int i) {
@@ -25,16 +25,15 @@ public class SalleRepository {
     public void saveSalles() {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            mapper.writeValue(new File(FILE_PATH), salles);
+            mapper.writeValue(file, salles);
         } catch (IOException e) {
-
+            System.err.println("Erreur lors de la sauvegarde des salles: " + e.getMessage());
         }
     }
 
     public void loadSalles() {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            File file = new File(FILE_PATH);
             if (file.exists()) {
                 salles = mapper.readValue(file, new TypeReference<Salle[]>() {});
             }

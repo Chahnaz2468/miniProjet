@@ -4,6 +4,8 @@ public class Patient extends Personne {
     private String dateNaissance;
     private String addresse;
 
+    public Patient(){}
+
     public Patient(int id, String nom, String prenom, double telephone, String dateNaissance, String addresse) {
         super(id, nom, prenom, telephone);
         this.dateNaissance = dateNaissance;

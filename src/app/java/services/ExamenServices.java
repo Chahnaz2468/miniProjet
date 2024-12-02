@@ -21,4 +21,8 @@ public class ExamenServices {
     public List<Examen> afficherExamens (){
         return ExamenRepository.afficherExamens();
     }
+
+    public Examen trouverExamenParType(TypeExamen typeExamen) {
+        return ExamenRepository.trouverExamenParType(typeExamen);
+    }
 }

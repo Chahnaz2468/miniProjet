@@ -15,13 +15,15 @@ public class MenuPrincipal {
 			System.out.println("Bienvenue dans le Système de Gestion du Centre de Radiologie");
 	        do {
 	            System.out.println("\nMenu Principal:");
-	            System.out.println("1. Gestion des Salles");
-				System.out.println("2. Gestion des Examens");
+	            System.out.println("1. Gestion des salles");
+				System.out.println("2. Gestion des examens");
 				System.out.println("3. Gestion des medecins prescripteurs");
 				System.out.println("4. Gestion des medecins radiologues");
 				System.out.println("5. Gestion des techniciens");
-	            System.out.println("6. Gestion des Patients");
-	            System.out.println("7. Quitter");
+	            System.out.println("6. Gestion des patients");
+				System.out.println("7. Gestion des dossiers medicaux");
+				System.out.println("8. Gestion des rendez vous");
+	            System.out.println("9. Quitter");
 	            System.out.print("Choisissez une option: ");
 	            if (scanner.hasNextInt()) {
 	                choice = scanner.nextInt();
@@ -49,13 +51,16 @@ public class MenuPrincipal {
 						ControllerPrincipal.gestionPatient();
 	                    break;
 					case 7:
+						ControllerPrincipal.gestionDossierMed();
+					case 8:
+						ControllerPrincipal.gestionRendezVous();
+					case 9:
 						System.out.println("");
 						break;
 	                default:
 	                    System.out.println("Option invalide. Essayez encore.");
 	            }
-	        } while (choice != 7);
-	        
+	        } while (choice != 9);
 	    }
 	}
 

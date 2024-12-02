@@ -12,6 +12,8 @@ import java.util.Scanner;
 public class PatientIhm {
     PatientController patientController;
 
+    public PatientIhm() {}
+
     public PatientIhm(PatientController patientController) {
 
         this.patientController = patientController;
@@ -22,25 +24,16 @@ public class PatientIhm {
         int choice;
         do {
             System.out.println("\n===== Menu Gestion des patients =====");
-            System.out.println("1. Ajouter un Patient");
-            System.out.println("2. Afficher les Patients");
-            System.out.println("3. modifier les Patients");
-            System.out.println("4. retirer les Patients");
+            System.out.println("1. Afficher les patientq");
+            System.out.println("2. Afficher un patient");
+            System.out.println("3. modifier un patient");
+            System.out.println("4. retirer un atient");
             System.out.println("5. Retour au Menu Principal");
             System.out.print("Choisissez une option: ");
             choice = scanner.nextInt();
 
             switch (choice) {
                 case 1:
-                    Patient patient = saisirPatient();
-                    try {
-                        patientController.ajouterPatient(patient);
-                        System.out.println("Patient ajouté avec succès !");
-                    } catch (PatientRedondanceException e) {
-                        System.err.println("Erreur : " + e.getMessage());
-                    }
-                    break;
-                case 2:
                     Patient[] patients = patientController.afficherPatients();
                     if (patients != null) {
                         for (Patient p : patients) {
@@ -51,6 +44,8 @@ public class PatientIhm {
                         }
                     }
                     break;
+                case 2:
+                    this.trouverPatient();
                 case 3:
                     System.out.println("Entrez l'id de la salle à modifier:");
                     int id = scanner.nextInt();
@@ -87,33 +82,45 @@ public class PatientIhm {
                 default:
                     System.out.println("Choix invalide, veuillez réessayer.");
             }
-        } while (choice != 5);
+        } while (choice !=4);
     }
 
-    public Patient saisirPatient() {
+    public Patient saisirPatient(int id) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Entrez l'id de patient:");
-        int id = scanner.nextInt();
         scanner.nextLine();
-        System.out.println("Entrez le nom de patient:");
+        System.out.println("Entrez le nom du patient:");
         String nom= scanner.nextLine();
         scanner.nextLine();
-        System.out.println("Entrez le prénom de patient:");
+        System.out.println("Entrez le prénom du patient:");
         String prenom= scanner.nextLine();
         scanner.nextLine();
-        System.out.println("Entrez le numéro de téléphone de patient:");
+        System.out.println("Entrez le numéro de téléphone du patient:");
         double telephone = scanner.nextDouble();
         scanner.nextLine();
-        System.out.println("Entrez le date de naissance de patient:");
+        System.out.println("Entrez le date de naissance du patient:");
         String dateNaissance= scanner.nextLine();
         scanner.nextLine();
-        System.out.println("Entrez l'addesse de patient:");
+        System.out.println("Entrez l'addesse du patient:");
         String addresse= scanner.nextLine();
         scanner.nextLine();
 
         return new Patient(id, nom, prenom, telephone, dateNaissance, addresse);
     }
 
-
+    public void trouverPatient() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Veuillez saisir l'id de patient à trouver:");
+        int id = scanner.nextInt();
+        if(patientController.trouverPatient(id)==null){
+            System.out.println("L'id de patient n'existe pas");
+        }else{
+            Patient p = patientController.trouverPatient(id);
+            System.out.println("nom du patient: "+p.getNom());
+            System.out.println("prenom du patient: "+p.getPrenom());
+            System.out.println("telephone du patient: "+p.getTelephone());
+            System.out.println("date de naissance du patient: "+p.getDateNaissance());
+            System.out.println("adresse du patient: "+p.getAddresse());
+        }
+    }
 
 }

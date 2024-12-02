@@ -78,4 +78,22 @@ public class ExamenRepository {
             return null;
         }
     }
+
+    public static Examen trouverExamenParType(TypeExamen typeExamen) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            if (file.exists() && file.length() > 0) {
+                List<Examen> examens = mapper.readValue(file, new TypeReference<List<Examen>>() {});
+                for (Examen examen : examens) {
+                    if (examen.getTypeExamen().equals(typeExamen)) {
+                        return examen;
+                    }
+                }
+            }
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

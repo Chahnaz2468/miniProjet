@@ -25,12 +25,11 @@ public class MedPrescriIHM {
         int choice = 0;
         do {
             System.out.println("\n===== Menu Gestion des medecins prescripteurs =====");
-            System.out.println("1. Ajouter un medecin prescripteur");
-            System.out.println("2. Modifier un medecin prescripteur");
-            System.out.println("3. Retirer un medecin prescripteur");
-            System.out.println("4. Trouver un medecin prescripteur");
-            System.out.println("5. Afficher les medecins prescripteurs");
-            System.out.println("6. Retour au Menu Principal");
+            System.out.println("1. Modifier un medecin prescripteur");
+            System.out.println("2. Retirer un medecin prescripteur");
+            System.out.println("3. Trouver un medecin prescripteur");
+            System.out.println("4. Afficher les medecins prescripteurs");
+            System.out.println("5. Retour au Menu Principal");
             System.out.print("Choisissez une option: ");
 
             if (scanner.hasNextInt()) {
@@ -43,21 +42,18 @@ public class MedPrescriIHM {
 
             switch (choice) {
                 case 1:
-                    this.saisir();
-                    break;
-                case 2:
                     this.modifierTelphoneMedPrescri();
                     break;
-                case 3:
+                case 2:
                     this.supprimerMedPrescri();
                     break;
-                case 4:
+                case 3:
                     this.findmedPrescriById();
                     break;
-                case 5:
+                case 4:
                     this.afficherMedPrescris();
                     break;
-                case 6:
+                case 5:
                     System.out.println("Retour au menu principal...");
                     break;
                 default:
@@ -66,10 +62,8 @@ public class MedPrescriIHM {
         } while (choice != 6);
     }
 
-    public void saisir() {
+    public void saisir(int id) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("donner l'identifiant: ");
-        int id = sc.nextInt();
         System.out.println("donner le nom: ");
         String nom= sc.next();
         System.out.println("donner le prenom: ");
@@ -134,7 +128,7 @@ public class MedPrescriIHM {
             System.out.println("Erreur");
         else {
             medPrescri = mpc.find(id);
-            System.out.println("Medecin radiologue:");
+            System.out.println("Medecin prescripteur:");
             System.out.println("  ID: " + medPrescri.getId());
             System.out.println("  Nom: " + medPrescri.getNom());
             System.out.println("  Prenom: " + medPrescri.getPrenom());
