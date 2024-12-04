@@ -12,7 +12,10 @@ import java.time.chrono.ChronoLocalDateTime;
 import java.util.List;
 
 public class SalleService {
-	SalleRepository salleRepository;
+	SalleRepository salleRepository=new SalleRepository();
+
+	public SalleService() {}
+
     public SalleService(SalleRepository salleRepository) {
 		
 		this.salleRepository =salleRepository;
@@ -94,5 +97,15 @@ public class SalleService {
 			}
 		}
 		throw new IllegalArgumentException("Salle numéro " + TypeEx + " n'existe pas.");
+	}
+
+	public Salle findSalleByType(TypeExamen typeExamen) {
+		Salle[] salles = salleRepository.getSalles();
+		for (Salle salle : salles) {
+			if (salle.getTypeExamen() == typeExamen) {
+				return salle;
+			}
+		}
+		return null;
 	}
 }

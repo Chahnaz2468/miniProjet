@@ -9,7 +9,10 @@ import exceptions.DoubleSalleException;
 import java.time.LocalDateTime;
 
 public class SalleController {
-	   SalleService salleService;
+	   SalleService salleService=new SalleService();
+
+	   public SalleController() {}
+
        public SalleController(SalleService salleService) {
 
 		   this.salleService = salleService;
@@ -44,5 +47,9 @@ public class SalleController {
 
 	public boolean verifierSalleDisponibiliteParTemps(TypeExamen typeExamen, LocalDateTime debut, LocalDateTime fin) {
 		return salleService.verifierSalleDisponibiliteParTemps(typeExamen, debut, fin);
+	}
+
+	public Salle findSalleByType(TypeExamen typeExamen) {
+		   return salleService.findSalleByType(typeExamen);
 	}
 }

@@ -7,7 +7,7 @@ public class Personnel extends Personne {
 
     public Personnel() {}
 
-    public Personnel(int id, String nom, String prenom, double telephone, int horaire, int annexp, String email) {
+    public Personnel(int id, String nom, String prenom, String telephone, int horaire, int annexp, String email) {
         super(id, nom, prenom, telephone);
         this.horraire = horaire;
         this.annexp = annexp;

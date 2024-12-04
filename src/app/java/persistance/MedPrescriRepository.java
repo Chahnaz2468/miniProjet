@@ -30,49 +30,70 @@ public class MedPrescriRepository {
         }
     }
 
-    public static int modifierTelephoneMedPrescri(int id, double telephone) {
+    public static int modifierTelephoneMedPrescri(int id, String telephone) {
         ObjectMapper mapper = new ObjectMapper();
         try {
+            if (!file.exists() || file.length() == 0) {
+                return -1;
+            }
             List<MedPrescri> medPrescris = mapper.readValue(file, new TypeReference<List<MedPrescri>>() {});
+            boolean found = false;
+
             for (MedPrescri medPrescri : medPrescris) {
-                if (medPrescri.getId()==id) {
+                if (medPrescri.getId() == id) {
                     medPrescri.setTelephone(telephone);
+                    found = true;
+                    break;
                 }
             }
-            mapper.writeValue(file, medPrescris);
-            return 1;
 
+            if (found) {
+                mapper.writeValue(file, medPrescris);
+                return 1;
+            } else {
+                return 0;
+            }
         } catch (IOException e) {
             e.printStackTrace();
-            return 0;
+            return -2;
         }
     }
 
     public static int supprimerMedPrescri(int id) {
         ObjectMapper mapper = new ObjectMapper();
         try {
+            if (!file.exists() || file.length() == 0) {
+                return -1;
+            }
             List<MedPrescri> medPrescris = mapper.readValue(file, new TypeReference<List<MedPrescri>>() {});
             Iterator<MedPrescri> iterator = medPrescris.iterator();
+            boolean found = false;
             while (iterator.hasNext()) {
                 MedPrescri medPrescri = iterator.next();
-                if (medPrescri.getId() == (id)) {
+                if (medPrescri.getId() == id) {
                     iterator.remove();
+                    found = true;
                 }
             }
-            mapper.writeValue(file, medPrescris);
-            return 1;
-
+            if (found) {
+                mapper.writeValue(file, medPrescris);
+                return 1;
+            } else {
+                return 0;
+            }
         } catch (IOException e) {
             e.printStackTrace();
-            return 0;
+            return -2;
         }
     }
 
     public static List<MedPrescri> afficherMedPrescris() {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            List<MedPrescri> medPrescris = mapper.readValue(file, new TypeReference<List<MedPrescri>>() {});
-            return medPrescris;
+            if (!file.exists() || file.length() == 0) {
+                return new ArrayList<>();
+            }
+            return mapper.readValue(file, new TypeReference<List<MedPrescri>>() {});
         } catch (IOException e) {
             e.printStackTrace();
             return null;

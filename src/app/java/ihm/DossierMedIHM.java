@@ -9,8 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class DossierMedIHM {
-    private DossierMedController dmc;
-    private PatientController pc;
+    private DossierMedController dmc=new DossierMedController();
 
     public DossierMedIHM() {}
 
@@ -69,7 +68,7 @@ public class DossierMedIHM {
     }
 
     public DossierMed saisir() {
-        Scanner sc = new Scanner(System.in);
+        /*Scanner sc = new Scanner(System.in);
         Ordonnance ord = new Ordonnance();
         ord.ajouterOrdonnance();
         DossierMed dossierMed;
@@ -90,10 +89,35 @@ public class DossierMedIHM {
             ords.add(ord);
         }
         if (dmc.ajout(dossierMed) ==1)
-            System.out.println("succes ");
+            System.out.println("succès ");
         else
             System.out.println("Erreur");
-        return dossierMed;
+        return dossierMed;*/
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Veuillez saisir l'id de patient:");
+        int id = sc.nextInt();
+        if (dmc.find(id) == null) {
+            PatientIhm pi = new PatientIhm();
+            Patient patient = pi.saisirPatient(id);
+            int idd = dmc.count();
+            List<Ordonnance> ords = new ArrayList<>();
+            Ordonnance ord = new Ordonnance();
+            ord.ajouterOrdonnance(1);
+            ords.add(ord);
+            DossierMed dossierMed = new DossierMed(idd, patient, ords);
+            if (dmc.ajout(dossierMed) == 1)
+                System.out.println("Dossier créé avec succès.");
+            else
+                System.out.println("Erreur lors de la création du dossier.");
+            return dossierMed;
+        } else {
+            DossierMed dossierMed = dmc.find(id);
+            List<Ordonnance> ords = dossierMed.getOrds();
+            Ordonnance ord = new Ordonnance();
+            ord.ajouterOrdonnance(ords.size());
+            ords.add(ord);
+            return dossierMed;
+        }
     }
 
     public void modifierTypeExLastOrd() {
@@ -102,7 +126,12 @@ public class DossierMedIHM {
         int id = sc.nextInt();
         System.out.println("Veuillez saisir le nouveau type d'examen : ");
         String input = sc.next().toUpperCase();
-        TypeExamen typeExamen = TypeExamen.valueOf(input);
+        TypeExamen typeExamen = null;
+        try {
+            typeExamen = TypeExamen.valueOf(input);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Type d'examen invalide, veuillez réessayer.");
+        }
         switch(dmc.modif(id,typeExamen)){
             case -3:
                 System.out.println("Erreur");
@@ -117,7 +146,7 @@ public class DossierMedIHM {
                 System.out.println("Aucun dossier médical trouvé avec cet ID.");
                 break;
             case 1:
-                System.out.println("Modification faite avec succes.");
+                System.out.println("Modification faite avec succès.");
                 break;
         }
     }
@@ -137,7 +166,7 @@ public class DossierMedIHM {
                 System.out.println("Aucun dossier médical trouvé avec cet ID.");
                 break;
             case 1:
-                System.out.println("Suppresion faite avec succes.");
+                System.out.println("Suppresion faite avec succès.");
                 break;
         }
     }
@@ -183,24 +212,12 @@ public class DossierMedIHM {
                     System.out.println("dossier:");
                     System.out.println("  ID dossier: " + dossierMed.getId());
                     System.out.println("patient");
-                    System.out.println("  ID: " + dossierMed.getPatient().getId());
-                    System.out.println("  Nom: " + dossierMed.getPatient().getNom());
-                    System.out.println("  Prenom: " + dossierMed.getPatient().getPrenom());
-                    System.out.println("  telephone: " + dossierMed.getPatient().getTelephone());
-                    System.out.println("  date de naissance: " + dossierMed.getPatient().getDateNaissance());
-                    System.out.println("  addresse: " + dossierMed.getPatient().getAddresse());
-                    System.out.println("-----------------------------");
+                    Patient patient=new Patient();
+                    patient.afficherPatient(dossierMed.getPatient());
                     List<Ordonnance> ords=dossierMed.getOrds();
                     for (Ordonnance ord : ords) {
-                        System.out.println("Ordonnance");
-                        System.out.println("  Id: " + ord.getId());
-                        System.out.println("  medecin prescripteur: ");
-                        System.out.println("  ID: " + ord.getMedPrescri().getId());
-                        System.out.println("  nom: " + ord.getMedPrescri().getNom());
-                        System.out.println("  prenom: " + ord.getMedPrescri().getPrenom());
-                        System.out.println("  telephone: " + ord.getMedPrescri().getTelephone());
-                        System.out.println("  Specialite: " + ord.getMedPrescri().getSpecialite());
-                        System.out.println("-----------------------------");
+                        Ordonnance ordonnance=new Ordonnance();
+                        ordonnance.afficherOrdonnance(ord);
                     }
                     System.out.println("-----------------------------");
                 }
@@ -246,30 +263,22 @@ public class DossierMedIHM {
         Scanner sc = new Scanner(System.in);
         System.out.println("Veuillez saisir l'id du patient propriétaire du dossier à trouver: ");
         int id = sc.nextInt();
-
         try {
             DossierMed dossierMed = dmc.find(id);
+
+            if (dossierMed == null) {
+                System.out.println("Aucun dossier trouvé pour le patient avec l'ID " + id);
+                return;
+            }
             System.out.println("dossier:");
             System.out.println("  ID dossier: " + dossierMed.getId());
             System.out.println("patient");
-            System.out.println("  ID: " + dossierMed.getPatient().getId());
-            System.out.println("  Nom: " + dossierMed.getPatient().getNom());
-            System.out.println("  Prenom: " + dossierMed.getPatient().getPrenom());
-            System.out.println("  telephone: " + dossierMed.getPatient().getTelephone());
-            System.out.println("  date de naissance: " + dossierMed.getPatient().getDateNaissance());
-            System.out.println("  addresse: " + dossierMed.getPatient().getAddresse());
-            System.out.println("-----------------------------");
-            List<Ordonnance> ords=dossierMed.getOrds();
+            Patient patient=new Patient();
+            patient.afficherPatient(dossierMed.getPatient());
+            List<Ordonnance> ords = dossierMed.getOrds();
             for (Ordonnance ord : ords) {
-                System.out.println("Ordonnance");
-                System.out.println("  Id: " + ord.getId());
-                System.out.println("  medecin prescripteur: ");
-                System.out.println("  ID: " + ord.getMedPrescri().getId());
-                System.out.println("  nom: " + ord.getMedPrescri().getNom());
-                System.out.println("  prenom: " + ord.getMedPrescri().getPrenom());
-                System.out.println("  telephone: " + ord.getMedPrescri().getTelephone());
-                System.out.println("  Specialite: " + ord.getMedPrescri().getSpecialite());
-                System.out.println("-----------------------------");
+                Ordonnance ordonnance=new Ordonnance();
+                ordonnance.afficherOrdonnance(ord);
             }
             System.out.println("-----------------------------");
         } catch (IllegalArgumentException e) {

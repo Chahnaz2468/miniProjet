@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ExamenController {
-    private ExamenServices es;
+    private ExamenServices es=new ExamenServices();
+
+    public ExamenController() {
+    }
 
     public ExamenController(ExamenServices es) {
         this.es = es;

@@ -34,4 +34,8 @@ public class DossierMedServices {
         }*/
         return dossier;
     }
+
+    public int countDossierMed() {
+        return DossierMedRepository.countDossierMeds();
+    }
 }

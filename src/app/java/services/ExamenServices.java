@@ -6,6 +6,8 @@ import java.util.List;
 
 public class ExamenServices {
 
+    public ExamenServices() {}
+
     public int ajouterExamen(Examen examen) {
         return ExamenRepository.ajouterExamen(examen);
     }

@@ -126,4 +126,20 @@ public class DossierMedRepository {
             return null;
         }
     }
+
+    public static int countDossierMeds() {
+        ObjectMapper mapper = new ObjectMapper();
+        int s=0;
+        try {
+            if (file.exists() && file.length() > 0) {
+                List<DossierMed> dossierMeds = mapper.readValue(file, new TypeReference<List<DossierMed>>() {});
+                for (DossierMed dossierMed : dossierMeds)
+                    s+=1;
+            }
+            return 0;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }

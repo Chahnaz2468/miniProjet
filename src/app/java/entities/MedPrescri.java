@@ -6,7 +6,7 @@ public class MedPrescri extends Personne {
     public MedPrescri() {
     }
 
-    public MedPrescri(int id, String nom, String prenom, double telephone, String specialite) {
+    public MedPrescri(int id, String nom, String prenom, String telephone, String specialite) {
         super(id, nom, prenom, telephone);
         this.specialite = specialite;
     }

@@ -1,14 +1,10 @@
 package controllers;
 
-import entities.MedRadio;
 import entities.Technicien;
-import ihm.MedRadioIHM;
 import ihm.TechIHM;
-import services.MedRadioServices;
 import services.TechServices;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class TechController {
     private TechServices ts;

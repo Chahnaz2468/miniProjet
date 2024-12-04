@@ -6,6 +6,8 @@ import exceptions.PatientRedondanceException;
 import ihm.PatientIhm;
 import services.PatientService;
 
+import java.util.List;
+
 public class PatientController {
     PatientService patientService;
     public PatientController(PatientService patientService) {
@@ -22,7 +24,7 @@ public class PatientController {
         patientService.ajouterPatient(patient);
     }
 
-    public Patient[] afficherPatients() {
+    public List<Patient> afficherPatients() {
 
         return patientService.getPatients();
 

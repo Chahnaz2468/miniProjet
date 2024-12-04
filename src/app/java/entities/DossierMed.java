@@ -8,6 +8,9 @@ public class DossierMed {
     protected Patient patient;
     protected List<Ordonnance> ords ;
 
+    public DossierMed() {
+    }
+
     public DossierMed(int id, Patient patient, List<Ordonnance> ords) {
         this.id = id;
         this.patient = patient;

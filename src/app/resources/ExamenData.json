@@ -1,1 +1,1 @@
-[{"typeExamen":"Radiographie","cout":254.0,"duree":18}]
+[{"typeExamen":"RADIOGRAPHIE","cout":85.0,"duree":20},{"typeExamen":"ECHOGRAPHIE","cout":100.0,"duree":30},{"typeExamen":"MAMMOGRAPHIE","cout":90.0,"duree":35},{"typeExamen":"DOPPLER","cout":50.0,"duree":10},{"typeExamen":"SCANNER","cout":60.0,"duree":20},{"typeExamen":"IRM","cout":120.0,"duree":45}]

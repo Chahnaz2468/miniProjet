@@ -12,7 +12,7 @@ public class MedPrescriServices {
         return MedPrescriRepository.ajouterMedPriscri(medPrescri);
     }
 
-    public int modifierTelephoneMedPrescri(int id, double telephone) {
+    public int modifierTelephoneMedPrescri(int id, String telephone) {
         return MedPrescriRepository.modifierTelephoneMedPrescri(id,telephone);
     }
 

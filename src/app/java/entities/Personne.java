@@ -4,12 +4,12 @@ public class Personne {
     protected int id;
     protected String nom;
     protected String prenom;
-    protected double telephone;
+    protected String telephone;
 
     public Personne() {
     }
 
-    public Personne(int id, String nom, String prenom, double telephone) {
+    public Personne(int id, String nom, String prenom, String telephone) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -40,11 +40,11 @@ public class Personne {
         this.prenom = prenom;
     }
 
-    public double getTelephone() {
+    public String getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(double telephone) {
+    public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
 }

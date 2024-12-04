@@ -9,7 +9,7 @@ public class SalleRepository {
     static File file = new File("src/app/resources/SalleData.json");
     private Salle[] salles = new Salle[100];
 
-    public SalleRepository(int i) {
+    public SalleRepository() {
         loadSalles();
         if (salles == null) this.salles = new Salle[100];
     }

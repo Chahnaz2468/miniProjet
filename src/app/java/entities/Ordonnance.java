@@ -42,11 +42,9 @@ public class Ordonnance {
         this.typeExamen = typeExamen;
     }
 
-    public void ajouterOrdonnance() {
+    public void ajouterOrdonnance(int id) {
         MedPrescriController mpc=new MedPrescriController();
         Scanner sc = new Scanner(System.in);
-        System.out.println("Veuillez saisir l'id de patient:");
-        int id = sc.nextInt();
         System.out.println("donner l'identifiant du medecin prescripteur: ");
         int idm = sc.nextInt();
         MedPrescri medPrescri = new MedPrescri();
@@ -69,6 +67,17 @@ public class Ordonnance {
 
     public void afficherOrdonnance() {
         MedPrescriController mpc=new MedPrescriController();
+    }
 
+    public void afficherOrdonnance(Ordonnance ord) {
+        System.out.println("Ordonnance");
+        System.out.println("  Id: " + ord.getId());
+        System.out.println("  medecin prescripteur: ");
+        System.out.println("  ID: " + ord.getMedPrescri().getId());
+        System.out.println("  nom: " + ord.getMedPrescri().getNom());
+        System.out.println("  prenom: " + ord.getMedPrescri().getPrenom());
+        System.out.println("  telephone: " + ord.getMedPrescri().getTelephone());
+        System.out.println("  Specialite: " + ord.getMedPrescri().getSpecialite());
+        System.out.println("-----------------------------");
     }
 }

@@ -8,7 +8,10 @@ import services.DossierMedServices;
 import java.util.List;
 
 public class DossierMedController {
-    private DossierMedServices dms;
+    private DossierMedServices dms=new DossierMedServices();
+
+    public DossierMedController() {
+    }
 
     public DossierMedController(DossierMedServices dms) {
         this.dms = dms;
@@ -45,5 +48,9 @@ public class DossierMedController {
 
     public DossierMed find(int id) {
         return dms.findDossierMedByPatientId(id);
+    }
+
+    public int count(){
+        return dms.countDossierMed();
     }
 }

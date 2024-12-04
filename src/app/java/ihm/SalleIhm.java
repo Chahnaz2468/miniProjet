@@ -1,5 +1,6 @@
 package ihm;
 import controllers.ControllerPrincipal;
+import controllers.ExamenController;
 import entities.Salle;
 import entities.TypeExamen;
 
@@ -8,7 +9,9 @@ import java.util.Scanner;
 import controllers.SalleController;
 import exceptions.DoubleSalleException;
 public class SalleIhm {
-	SalleController salleController;
+	SalleController salleController=new SalleController();
+
+    public SalleIhm() {}
 
     public SalleIhm(SalleController salleController) {
 
@@ -75,7 +78,15 @@ public class SalleIhm {
                     System.out.println("la Salle est retirée.");
                     break;
                 case 5:
-                    verifierDisponibiliteSalle();
+                    scanner = new Scanner(System.in);
+                    System.out.print("Entrez le type d'examen: ");
+                    String input = scanner.next().toUpperCase();
+                    typeExamen = TypeExamen.valueOf(input);
+                    System.out.println("Veuillez saisir la date et l'heure du rendez-vous (yyyy-MM-ddTHH:mm):");
+                    String dateDebutInput = scanner.nextLine();
+                    LocalDateTime dateDebut = LocalDateTime.parse(dateDebutInput);
+                    ExamenController ec=new ExamenController();
+                    verifierDisponibiliteSalle(findSalleByType(typeExamen),dateDebut,dateDebut.plusMinutes(ec.trouverExamen(typeExamen).getDuree()));
                     break;
                 case 6:
                     ControllerPrincipal controllerPrincipal = new ControllerPrincipal();
@@ -117,28 +128,25 @@ public class SalleIhm {
         return new Salle(num, typeExamen, disponibilite);
     }
 
-    public void verifierDisponibiliteSalle() {
+    public boolean verifierDisponibiliteSalle(Salle salle,LocalDateTime debut,LocalDateTime fin) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Veuillez saisir le type d'examen fait dans cette salle(RADIOGRAPHIE, ECHOGRAPHIE, MAMMOGRAPHIE, DOPPLER, SCANNER, IRM): ");
-        String input = scanner.next().toUpperCase();;
-        TypeExamen typeExamen = TypeExamen.valueOf(input);
-        System.out.println("Entrez la date et l'heure de début (yyyy-MM-ddTHH:mm):");
-        scanner.nextLine();
-        String debutInput = scanner.nextLine();
-        LocalDateTime debut = LocalDateTime.parse(debutInput);
-        System.out.println("Entrez la date et l'heure de fin (yyyy-MM-ddTHH:mm):");
-        String finInput = scanner.nextLine();
-        LocalDateTime fin = LocalDateTime.parse(finInput);
         try {
-            boolean disponible = salleController.verifierSalleDisponibiliteParTemps(typeExamen, debut, fin);
+            boolean disponible = salleController.verifierSalleDisponibiliteParTemps(salle.getTypeExamen(), debut, fin);
             if (disponible) {
                 System.out.println("La salle est disponible pour la période donnée.");
+                return true;
             } else {
                 System.out.println("La salle n'est pas disponible pour cette période.");
+                return false;
             }
         } catch (IllegalArgumentException e) {
             System.err.println("Erreur : " + e.getMessage());
         }
+        return false;
+    }
+
+    public Salle findSalleByType(TypeExamen typeExamen){
+        return salleController.findSalleByType(typeExamen);
     }
 }
 

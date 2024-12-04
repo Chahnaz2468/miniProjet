@@ -59,7 +59,7 @@ public class MedPrescriIHM {
                 default:
                     System.out.println("Choix invalide, veuillez réessayer.");
             }
-        } while (choice != 6);
+        } while (choice != 5);
     }
 
     public void saisir(int id) {
@@ -69,42 +69,51 @@ public class MedPrescriIHM {
         System.out.println("donner le prenom: ");
         String prenom = sc.next();
         System.out.println("donner le numero telephone: ");
-        double num = sc.nextDouble();
+        String num = sc.next();
         System.out.println("donner la specialite: ");
         String spe = sc.next();
         MedPrescri medPrescri = new MedPrescri(id, nom, prenom, num, spe);
         if (mpc.ajout(medPrescri) ==1)
-            System.out.println("Medecin prescripteur ajouté avec succes ");
+            System.out.println("Medecin prescripteur ajouté avec succès ");
         else
             System.out.println("Erreur");
     }
 
     public void modifierTelphoneMedPrescri(){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Veuillez saisir l'id de medecin prescripteur: ");
+        System.out.println("Veuillez saisir l'id du medecin prescripteur: ");
         int id = sc.nextInt();
         System.out.println("Veuillez saisir le nouveau numero telephone: ");
-        double telephone = sc.nextDouble();
+        String telephone = sc.next();
         if (mpc.modif(id,telephone) == 1)
-            System.out.println("Modification faite avec succes ");
-        else
-            System.out.println("Erreur");
+            System.out.println("Médecin prescripteur modifié avec succès.");
+        else{
+            if (mpc.modif(id,telephone) == 0) {
+                System.out.println("Aucun médecin prescripteur trouvé avec cet ID.");
+            } else {
+                System.out.println("Erreur lors de la modification du médecin prescripteur.");
+            }
+        }
     }
 
     public void supprimerMedPrescri(){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Veuillez saisir l'id de medecin prescripteur à supprimer: ");
+        System.out.println("Veuillez saisir l'id du medecin prescripteur à supprimer: ");
         int input = sc.nextInt();
         if (mpc.supp(input) ==1)
-            System.out.println("Suppresion faite avec succes ");
-        else
-            System.out.println("Erreur");
+            System.out.println("Suppresion faite avec succès ");
+        else{
+            if(mpc.supp(input) == 0)
+                System.out.println("Aucun médecin prescripteur trouvé avec cet ID.");
+            else
+                System.out.println("Erreur lors de la suppression du médecin prescripteur.");
+        }
     }
 
     public void afficherMedPrescris() {
         List<MedPrescri> medPrescris =mpc.affich();
         if (medPrescris == null || medPrescris.isEmpty()) {
-            System.out.println("Aucun examen à afficher.");
+            System.out.println("Aucun médecin prescripteur à afficher.");
             return;
         }
 

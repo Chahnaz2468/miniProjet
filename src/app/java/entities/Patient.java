@@ -6,7 +6,7 @@ public class Patient extends Personne {
 
     public Patient(){}
 
-    public Patient(int id, String nom, String prenom, double telephone, String dateNaissance, String addresse) {
+    public Patient(int id, String nom, String prenom, String telephone, String dateNaissance, String addresse) {
         super(id, nom, prenom, telephone);
         this.dateNaissance = dateNaissance;
         this.addresse = addresse;
@@ -26,5 +26,16 @@ public class Patient extends Personne {
 
     public void setAddresse(String addresse) {
         this.addresse = addresse;
+    }
+
+    public void afficherPatient(Patient patient) {
+        System.out.println("patient");
+        System.out.println("  ID: " + patient.getId());
+        System.out.println("  Nom: " + patient.getNom());
+        System.out.println("  Prenom: " + patient.getPrenom());
+        System.out.println("  telephone: " + patient.getTelephone());
+        System.out.println("  date de naissance: " + patient.getDateNaissance());
+        System.out.println("  addresse: " + patient.getAddresse());
+        System.out.println("-----------------------------");
     }
 }

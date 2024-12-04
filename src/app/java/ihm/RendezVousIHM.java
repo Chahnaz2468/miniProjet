@@ -1,11 +1,12 @@
 package ihm;
 
+import controllers.ExamenController;
 import controllers.RendezVousController;
 import entities.DossierMed;
+import entities.Examen;
 import entities.RendezVous;
 import entities.Salle;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -67,18 +68,28 @@ public class RendezVousIHM {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Veuillez saisir l'ID du rendez-vous:");
         int id = scanner.nextInt();
+        scanner.nextLine();
         DossierMedIHM ihm = new DossierMedIHM();
         DossierMed dossierMed=ihm.saisir();
-        System.out.println("Veuillez saisir la date et l'heure du rendez-vous (yyyy-MM-ddTHH:mm):");
+        SalleIhm sihm=new SalleIhm();
+        Salle salle = sihm.findSalleByType(dossierMed.getOrds().getLast().getTypeExamen());
         scanner.nextLine();
-        String dateInput = scanner.nextLine();
-        LocalDateTime date = LocalDateTime.parse(dateInput);
-        System.out.println("Veuillez saisir le numéro de la salle:");
-        int salleNum = scanner.nextInt();
-        Salle salle = new Salle();
-        salle.setNum(salleNum);
-
-        RendezVous rendezVous = new RendezVous(id, dossierMed, date, salle);
+        System.out.println("Veuillez saisir la date et l'heure du rendez-vous (yyyy-MM-ddTHH:mm):");
+        String dateDebutInput = scanner.nextLine();
+        while (dateDebutInput.trim().isEmpty()) {
+            System.out.println("La date et l'heure ne peuvent pas être vides. Veuillez réessayer:");
+            dateDebutInput = scanner.nextLine();
+        }
+        LocalDateTime dateDebut = LocalDateTime.parse(dateDebutInput);
+        ExamenController ec=new ExamenController();
+        LocalDateTime dateFin = dateDebut.plusMinutes(ec.trouverExamen(dossierMed.getOrds().getLast().getTypeExamen()).getDuree());
+        boolean ok=sihm.verifierDisponibiliteSalle(salle,dateDebut,dateFin);
+        if (ok==false) {
+            System.out.println("Veuillez saisir une autre date: ");
+            dateDebutInput = scanner.nextLine();
+            dateDebut = LocalDateTime.parse(dateDebutInput);
+        }
+        RendezVous rendezVous = new RendezVous(id, dossierMed, dateDebut, salle);
         try {
             int result = rvc.ajout(rendezVous);
             if (result == 1) {

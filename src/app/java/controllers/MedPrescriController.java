@@ -32,7 +32,7 @@ public class MedPrescriController {
         return mps.ajouterMedPrescri(medPrescri);
     }
 
-    public int modif(int id,double num) {
+    public int modif(int id,String num) {
         return mps.modifierTelephoneMedPrescri(id,num);
     }
 

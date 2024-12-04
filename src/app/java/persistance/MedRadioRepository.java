@@ -32,39 +32,55 @@ public class MedRadioRepository {
     public static int modifierHorraireMedRadio(int id,int hr) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            List<MedRadio> medRadios = mapper.readValue(file,new TypeReference<List<MedRadio>>() {});
-
+            if (!file.exists() || file.length() == 0) {
+                return -1;
+            }
+            List<MedRadio> medRadios = mapper.readValue(file, new TypeReference<List<MedRadio>>() {});
+            boolean found = false;
             for (MedRadio medRadio : medRadios) {
-                if (medRadio.getId()==id) {
+                if (medRadio.getId() == id) {
                     medRadio.setHorraire(hr);
+                    found = true;
+                    break;
                 }
             }
-            mapper.writeValue(file, medRadios);
-            return 1;
+            if (found) {
+                mapper.writeValue(file, medRadios);
+                return 1;
+            } else {
+                return 0;
+            }
         } catch (IOException e) {
-            e.printStackTrace();
-            return 0;
+            return -2;
         }
     }
 
     public static int supprimerMedRadio(int id) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            List<MedRadio> medRadios = mapper.readValue(file,new TypeReference<List<MedRadio>>() {});
+            if (!file.exists() || file.length() == 0) {
+                return -1;
+            }
+            List<MedRadio> medRadios = mapper.readValue(file, new TypeReference<List<MedRadio>>() {});
             Iterator<MedRadio> iterator = medRadios.iterator();
+            boolean found = false;
             while (iterator.hasNext()) {
                 MedRadio medRadio = iterator.next();
-                if (medRadio.getId()==id) {
+                if (medRadio.getId() == id) {
                     iterator.remove();
+                    found = true;
+                    break;
                 }
+            }
+            if (found) {
                 mapper.writeValue(file, medRadios);
                 return 1;
+            } else {
+                return 0;
             }
         } catch (IOException e) {
-            e.printStackTrace();
-            return 0;
+            return -2;
         }
-        return 0;
     }
 
     public static List<MedRadio> afficherMedRadios() {

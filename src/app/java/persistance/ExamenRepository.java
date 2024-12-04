@@ -51,13 +51,17 @@ public class ExamenRepository {
     public static int supprimerExamen(TypeExamen typeExamen) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            List<Examen> examens = mapper.readValue(file,new TypeReference<List<Examen>>() {});
+            List<Examen> examens = mapper.readValue(file, new TypeReference<List<Examen>>() {});
+            boolean found = false;
             Iterator<Examen> iterator = examens.iterator();
             while (iterator.hasNext()) {
                 Examen examen = iterator.next();
                 if (examen.getTypeExamen().equals(typeExamen)) {
                     iterator.remove();
+                    found = true;
                 }
+            }
+            if (found) {
                 mapper.writeValue(file, examens);
                 return 1;
             }
@@ -75,7 +79,7 @@ public class ExamenRepository {
             return examens;
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
+            return new ArrayList<>();
         }
     }
 
@@ -84,9 +88,11 @@ public class ExamenRepository {
         try {
             if (file.exists() && file.length() > 0) {
                 List<Examen> examens = mapper.readValue(file, new TypeReference<List<Examen>>() {});
-                for (Examen examen : examens) {
-                    if (examen.getTypeExamen().equals(typeExamen)) {
-                        return examen;
+                if (examens != null && !examens.isEmpty()) {
+                    for (Examen examen : examens) {
+                        if (examen.getTypeExamen().equals(typeExamen)) {
+                            return examen;
+                        }
                     }
                 }
             }

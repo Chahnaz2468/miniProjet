@@ -9,6 +9,9 @@ import java.util.Scanner;
 public class MedRadioIHM {
     private MedRadioController mrc;
 
+    public MedRadioIHM() {
+    }
+
     public MedRadioIHM(MedRadioController mrc) {
         this.mrc = mrc;
     }
@@ -67,7 +70,7 @@ public class MedRadioIHM {
         } while (choice != 6);
     }
 
-    public void saisir() {
+    public MedRadio saisir() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Veuillez saisir l'id du medecin radiologue: ");
         int id = sc.nextInt();
@@ -76,7 +79,7 @@ public class MedRadioIHM {
         System.out.println("donner le prenom: ");
         String prenom = sc.next();
         System.out.println("donner le numero telephone: ");
-        double num = sc.nextDouble();
+        String num = sc.next();
         System.out.println("Veuillez saisir l'horraire: ");
         int horraire = sc.nextInt();
         System.out.println("Veuillez saisir combien d'année d'experience: ");
@@ -84,10 +87,12 @@ public class MedRadioIHM {
         System.out.println("Veuillez saisir l'email: ");
         String email = sc.next();
         MedRadio medRadio = new MedRadio(id, nom, prenom, num, horraire, annexp, email);
-        if (mrc.ajout(medRadio) == 1)
-            System.out.println("Medecin radiologue ajouté avec succes ");
+        if (mrc.ajout(medRadio) == 1){
+            System.out.println("Medecin radiologue ajouté avec succès");
+            return medRadio;}
         else
             System.out.println("Erreur");
+        return null;
     }
 
     public void modifierHorraireMedRadio() {
@@ -96,20 +101,29 @@ public class MedRadioIHM {
         int id = sc.nextInt();
         System.out.println("Veuillez saisir le nouveau horraire du medecin radiologue: ");
         int horraire = sc.nextInt();
-        if (mrc.modif(id, horraire) == 1)
-            System.out.println("Modification faite avec succes ");
-        else
-            System.out.println("Erreur");
+        if (mrc.modif(id,horraire) == 1)
+            System.out.println("Modification faite avec succès.");
+        else{
+            if (mrc.modif(id,horraire) == 0) {
+                System.out.println("Aucun médecin radiologue trouvé avec cet ID.");
+            } else {
+                System.out.println("Erreur lors de la modification du médecin radiologue.");
+            }
+        }
     }
 
     public void supprimerMedRadio() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Veuillez saisir l'id du medecin radiologue à supprimer: ");
         int id = sc.nextInt();
-        if (mrc.supp(id) == 1)
-            System.out.println("Suppresion faite avec succes ");
-        else
-            System.out.println("Erreur");
+        if (mrc.supp(id) ==1)
+            System.out.println("Suppresion faite avec succès ");
+        else{
+            if(mrc.supp(id) == 0)
+                System.out.println("Aucun médecin radiologue trouvé avec cet ID.");
+            else
+                System.out.println("Erreur lors de la suppression du médecin radiologue.");
+        }
     }
 
     public void afficherMedRadio() {

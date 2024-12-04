@@ -7,7 +7,9 @@ import java.util.Scanner;
 import controllers.ExamenController;
 
 public class ExamenIHM {
-    private ExamenController ec;
+    private ExamenController ec=new ExamenController();
+
+    public ExamenIHM() {}
 
     public ExamenIHM(ExamenController ec) {
         this.ec = ec;
@@ -83,7 +85,7 @@ public class ExamenIHM {
         int dureeExamen = sc.nextInt();
         Examen ex = new Examen(typeExamen, coutExamen, dureeExamen);
         if (ec.ajout(ex) ==1)
-            System.out.println("Examen ajouté avec succes ");
+            System.out.println("Examen ajouté avec succès ");
         else
             System.out.println("Erreur");
     }
@@ -96,7 +98,7 @@ public class ExamenIHM {
         System.out.println("Veuillez saisir le nouveau cout de l'examen: ");
         float cout = sc.nextFloat();
         if (ec.modif(typeExamen,cout) ==1)
-            System.out.println("Modification faite avec succes ");
+            System.out.println("Modification faite avec succès ");
         else
             System.out.println("Erreur");
     }
@@ -105,11 +107,16 @@ public class ExamenIHM {
         Scanner sc = new Scanner(System.in);
         System.out.println("Veuillez saisir le type d'examen à supprimer: ");
         String input = sc.next().toUpperCase();
-        TypeExamen typeExamen = TypeExamen.valueOf(input);
-        if (ec.supp(typeExamen) ==1)
-            System.out.println("Suppresion faite avec succes ");
-        else
-            System.out.println("Erreur");
+        try {
+            TypeExamen typeExamen = TypeExamen.valueOf(input);
+            if (ec.supp(typeExamen) == 1) {
+                System.out.println("Suppression faite avec succès.");
+            } else {
+                System.out.println("Aucun examen de ce type trouvé.");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Type d'examen invalide. Veuillez réessayer.");
+        }
     }
 
     public void afficherExamen() {
